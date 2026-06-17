@@ -17,6 +17,11 @@ const InputBibit = lazy(() => import('./pages/admin/InputBibit'));
 const ManajemenAkun = lazy(() => import('./pages/admin/ManajemenAkun'));
 const InputAkun = lazy(() => import('./pages/admin/InputAkun'));
 
+// -- Karyawan
+const LoginKaryawan = lazy(() => import('./pages/karyawan/LoginKaryawan')); 
+const DashboardKaryawan = lazy(() => import('./pages/karyawan/Dashboard'));
+const ManajemenStokKaryawan = lazy(() => import('./pages/karyawan/ManajemenStok'));
+
 // --- CUSTOMER & OTHERS (Disamakan dengan struktur folder di image_4b08bd.png) ---
 const Customer = lazy(() => import('./pages/Customer'));
 const NotFound = lazy(() => import('./pages/NotFound'));
@@ -31,6 +36,7 @@ function App() {
         {/* --- ROUTING AUTHENTICATION --- */}
         <Route element={<AuthLayout />}>
           <Route path="/admin/login" element={<LoginAdmin />} />
+          <Route path="/karyawan/login" element={<LoginKaryawan />} />
         </Route>
 
         {/* --- ROUTING ADMIN PANEL --- */}
@@ -47,6 +53,13 @@ function App() {
           
           <Route path="akun" element={<ManajemenAkun />} />
           <Route path="akun/form" element={<InputAkun />} />
+        </Route>
+
+        <Route path="/karyawan">
+          {/* Default rute /karyawan langsung ke dashboard karyawan */}
+          <Route index element={<Navigate to="dashboard" replace />} />
+          <Route path="dashboard" element={<DashboardKaryawan />} />
+          <Route path="stok" element={<ManajemenStokKaryawan />} />
         </Route>
 
         {/* --- ROUTING CUSTOMER (Publik) --- */}
